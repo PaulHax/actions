@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Get this thing on netlify.
+          From github edirot.
         </p>
         <a
           className="App-link"
