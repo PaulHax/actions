@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Envs are weird.
+          Envs are weird. really weiede
         </p>
         <a
           className="App-link"
