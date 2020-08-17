@@ -27,11 +27,18 @@ jobs:
     - name: Build page
       run: npm run build
 
+    - name: Produnction Config
+      if: github.ref == 'refs/heads/master'
+      run: echo "::set-env NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_PROD }}"
+
+    - name: Stage Config
+      if: github.ref == 'refs/heads/master'
+      run: echo "::set-env NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_STAGE }}"
+
     - name: Publish
       uses: netlify/actions/cli@master
-      if: github.ref == 'refs/heads/master' 
       with:
         args: deploy --dir=build --prod
       env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_SITE_ID: 
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
