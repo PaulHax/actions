@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Envs are weird. really weiede
+          Stage branch
         </p>
         <a
           className="App-link"
