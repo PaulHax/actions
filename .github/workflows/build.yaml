@@ -27,11 +27,19 @@ jobs:
     - name: Build page
       run: npm run build
 
+    - name: Config Site ID
+      id: siteid
+      shell: bash
+      run: |
+        SITE_ID="${{ secrets.NETLIFY_SITE_ID_STAGE }}"
+        if [ "${{ github.ref }}" = "refs/heads/master" ]; then SITE_ID="${{ secrets.NETLIFY_SITE_ID_PROD }}" ; fi        
+        echo ::set-output name=SITE_ID::${SITE_ID}
+        unset SITE_ID
+
     - name: Publish
       uses: netlify/actions/cli@master
-      if: github.ref == 'refs/heads/master' 
       with:
         args: deploy --dir=build --prod
       env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_SITE_ID: ${{ steps.siteid.outputs.SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
